@@ -1,5 +1,5 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef RAMPART_ENGINE_H
+#define RAMPART_ENGINE_H
 
 #include <gf/RenderWindow.h>
 
@@ -29,4 +29,4 @@ namespace rampart {
 }
 
 
-#endif //
+#endif // RAMPART_ENGINE_H

@@ -15,6 +15,7 @@ add_executable(rampart
   code/rampart.cc
   code/local/Map.cc
   code/local/MapManager.cc
+  code/local/Castle.cc
   code/local/Engine.cc
   code/local/Singletons.cc
 )

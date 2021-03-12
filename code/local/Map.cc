@@ -48,7 +48,7 @@ namespace rampart {
 
     void Map::render(gf::RenderTarget& target, const gf::RenderStates& states) {
         gf::Vector2f rectPos = {0.0f, 0.0f};
-        gf::Vector2f recSize = {0.0f, 0.0f};
+        gf::Vector2f rectSize = {0.0f, 0.0f};
 
         int length = m_tiles.size();
         
@@ -61,11 +61,17 @@ namespace rampart {
                 switch (m_tiles[i][j]){
                 case 0: 
                         rectPos = {0.0f, 0.0f};
-                        recSize = {0.5f, 0.5f };
+                        rectSize = {0.5f, 0.5f };
                     break;
                 case 1:
                         rectPos = {0.5f, 0.0f};
-                        recSize = { 1.0f, 0.5f};
+                        rectSize = { 1.0f, 0.5f};
+                    break;
+
+                case 2:
+                        rectPos = {0.0f, 0.5f};
+                        rectSize = {0.5f, 1.0f};
+                    break;        
                 default:
                     break;
                 }
@@ -74,7 +80,7 @@ namespace rampart {
                 gf::Sprite sprite;
                 sprite.setTexture(*m_tileset);
                 
-                sprite.setTextureRect(gf::RectF::fromMinMax(rectPos, recSize));
+                sprite.setTextureRect(gf::RectF::fromMinMax(rectPos, rectSize));
 
 
                 sprite.setPosition({xPosIndex, yPosIndex});
