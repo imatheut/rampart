@@ -11,6 +11,7 @@ find_package(gf REQUIRED COMPONENTS graphics)
 set(RAMPART_DATA_DIR "${CMAKE_INSTALL_PREFIX}/share/games/rampart")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/code/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h @ONLY)
 
+
 add_executable(rampart
   code/rampart.cc
   code/local/Map.cc
@@ -18,6 +19,9 @@ add_executable(rampart
   code/local/Castle.cc
   code/local/Engine.cc
   code/local/Singletons.cc
+  code/local/TextureLoader.cc
+  code/local/CastleManager.cc
+  code/local/Territory.cc
 )
 
 target_include_directories(rampart

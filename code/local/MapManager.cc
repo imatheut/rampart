@@ -5,7 +5,7 @@
 namespace rampart {
    
 
-    bool MapManager::generateMap(gf::Vector2u ) {
+    bool MapManager::generateMap() {
         std::vector<std::vector<int>> tiles {
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -35,6 +35,7 @@ namespace rampart {
         m_tiles = tiles;
 
 
+
         m_map.loadTile("tileset1.png", m_tiles);        
         m_map2.loadTile("tileset2.png", m_tiles);  
         m_map3.loadTile("tileset3.png", m_tiles);  
@@ -44,6 +45,27 @@ namespace rampart {
         return false;
     }
 
+    // getting the coord from the mousepressed position translated into coord
+    bool MapManager::isCastleAt(gf::Vector2f coord) {
+        bool ok = false;
+        try {
+            ok = m_tiles[coord.y][coord.x] == 2;
+        }
+        catch(const std::out_of_range& e) {
+            std::cout << "Exception out of range occurred ..." << std::endl;
+        }
+        return ok;;
+    }
+
+
+    // gf::Vector2f MapManager::getCastlePosition() const {
+        
+    // }
+
+
+    Map& MapManager::getMap() {
+        return m_map;
+    }
 
     void MapManager::render(gf::RenderTarget& target, const gf::RenderStates& states, size_t frameCount) {
         if(frameCount %100 < 30) {

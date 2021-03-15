@@ -9,14 +9,20 @@
 #include "Map.h"
 
 namespace rampart {
-    class MapManager : public gf::Entity{
+    class MapManager {
        
     public:
         MapManager()
         {
  
         }
-        bool generateMap(gf::Vector2u dimension);
+        bool generateMap();
+
+        Map& getMap();
+
+        bool isCastleAt(gf::Vector2f coord);
+
+        gf::Vector2f getCastlePosition() const;
 
         virtual void render(gf::RenderTarget& target, const gf::RenderStates& states, size_t frameCount);
 
@@ -24,7 +30,7 @@ namespace rampart {
     private:
         Map m_map, m_map2, m_map3;
         gf::Vector2u m_dimension;
-        std::vector<std::vector<int>> m_tiles;
+       std::vector<std::vector<int>> m_tiles;
     };
     
 }
