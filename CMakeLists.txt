@@ -21,7 +21,12 @@ add_executable(rampart
   code/local/Singletons.cc
   code/local/TextureLoader.cc
   code/local/CastleManager.cc
+  code/local/Wall.cc
+  code/local/WallManager.cc
   code/local/Territory.cc
+  code/local/TerritoryManager.cc
+  code/local/Cannon.cc
+  code/local/CannonManager.cc
 )
 
 target_include_directories(rampart

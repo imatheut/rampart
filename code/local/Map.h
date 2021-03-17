@@ -17,7 +17,7 @@ namespace rampart {
     gf::Vector2u getPosition() const;
 
     // Change the content of the tile at i j index position 
-    // content : 0 = water, 1 = ground, 2 = castle, ...
+    // content : 0 = water, 1 = ground, 2 = castle, 3 = territory, 4 = wall ...
     void setTile(int i, int j, uint8_t content);
 
     bool isCastleAt(gf::Vector2f coord);
@@ -29,7 +29,7 @@ namespace rampart {
   private:
     TextureLoader m_texture_loader;
     gf::Texture* m_tileset;
-    gf::Texture* m_tileset_territory;
+
     static std::vector<std::vector<int>> m_tiles;
     
     gf::RectF m_rect;

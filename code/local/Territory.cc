@@ -2,23 +2,33 @@
 #include "Dimension.h"
 #include <iostream>
 
+#include <gf/Sprite.h>
 namespace rampart {
 
-    void Territory::addTerritory(Map& map, Castle& castle) {
-        gf::Vector2f castlePostion = castle.getPosition();
 
-        // first row
-        map.setTile(castlePostion.y/C_TILE_DIMENSION-1, castlePostion.x/C_TILE_DIMENSION-1, 3);
-        map.setTile(castlePostion.y/C_TILE_DIMENSION-1, castlePostion.x/C_TILE_DIMENSION, 3);
-        map.setTile(castlePostion.y/C_TILE_DIMENSION-1, castlePostion.x/C_TILE_DIMENSION+1, 3);
-        // Second row
-        map.setTile(castlePostion.y/C_TILE_DIMENSION, castlePostion.x/C_TILE_DIMENSION-1, 3);
-        map.setTile(castlePostion.y/C_TILE_DIMENSION, castlePostion.x/C_TILE_DIMENSION+1, 3);
-        // third row
-        map.setTile(castlePostion.y/C_TILE_DIMENSION+1, castlePostion.x/C_TILE_DIMENSION-1, 3);
-        map.setTile(castlePostion.y/C_TILE_DIMENSION+1, castlePostion.x/C_TILE_DIMENSION, 3);
-        map.setTile(castlePostion.y/C_TILE_DIMENSION+1, castlePostion.x/C_TILE_DIMENSION+1, 3);
+    Territory::Territory(gf::Vector2f coord) {
+        m_tileset = m_texture_loader.load("tileset_territory.png");
+        m_position = {coord.x * C_TILE_DIMENSION, coord.y * C_TILE_DIMENSION};
+    }
 
 
+    void Territory::setPosition(gf::Vector2f coord) {
+        m_position = {coord.x * C_TILE_DIMENSION, coord.y * C_TILE_DIMENSION};
+    }
+
+    gf::Vector2f Territory::getPosition() const {
+        return m_position;
+    }    
+
+
+    void Territory::render(gf::RenderTarget& target, const gf::RenderStates& states) {
+        gf::Sprite sprite;
+        sprite.setTexture(*m_tileset);
+
+        sprite.setTextureRect(gf::RectF::fromMinMax({0.f, 0.5f}, {0.5f,1.f}));
+
+
+        sprite.setPosition(m_position);
+        target.draw(sprite);
     }
 }

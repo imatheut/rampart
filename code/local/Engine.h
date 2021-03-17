@@ -2,12 +2,13 @@
 #define RAMPART_ENGINE_H
 
 #include <gf/RenderWindow.h>
-
+#include <gf/Vector.h>
 
 #include "MapManager.h"
 #include "CastleManager.h"
-#include "Territory.h"
-
+#include "TerritoryManager.h"
+#include "WallManager.h"
+#include "CannonManager.h"
 
 namespace rampart {
     class Engine {
@@ -16,21 +17,27 @@ namespace rampart {
 
         virtual void initGame(gf::Vector2i mapSize);
         void drawMap(gf::RenderWindow& window, const gf::RenderStates& states);
-        void update(); // void param for now
+        void update(); 
+
+        void rotateCannons(gf::Vector2f cursorPos); 
 
         void selectCastle(gf::Vector2f cursorPos);
 
-        void newGame(gf::RenderWindow& window, const gf::RenderStates& states, gf::Vector2i mapSize);
+        void newGame(gf::RenderWindow& window, const gf::RenderStates& states);
 
 
+        void gameIntro(gf::RenderWindow& window);
+
+        void gameTrasition(gf::RenderWindow& window, const gf::RenderStates& states, const uint8_t& gameState);
 
 
     private:
         MapManager m_mapManager;
         CastleManager m_castleManager;
-        Territory m_territory;
+        TerritoryManager m_territoryManager;
+        CannonManager m_cannonManager;
 
-
+        WallManager m_wallManager;
 
         size_t m_frameCount;
 

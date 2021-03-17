@@ -19,8 +19,7 @@ namespace rampart {
   
     bool Map::loadTile(const std::string& tileset, const std::vector<std::vector<int>>& tiles) {
         m_tileset = m_texture_loader.load(tileset);
-        m_tileset_territory = m_texture_loader.load("tileset_territory.png");
-
+    
         // copying the tiles vector to a new array
         m_tiles = tiles;
     
@@ -78,14 +77,7 @@ namespace rampart {
                 case 2:
                         rectPos = {0.0f, 0.5f};
                         rectSize = {0.5f, 1.0f};
-                    break; 
-                case 3: 
-                        rectPos = {0.0f, 0.5f};
-                        rectSize = {0.5f, 1.0f};
-
-                        tileset = m_tileset_territory;
-        
-                    break;           
+                    break;              
                 default:
                     break;
                 }

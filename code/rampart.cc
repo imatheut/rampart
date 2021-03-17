@@ -64,13 +64,17 @@ int main() {
 
         case gf::EventType::MouseButtonPressed: {
           engine.selectCastle(event.mouseButton.coords);
+        }
+          break;
+        case gf::EventType::MouseMoved : {
+          engine.rotateCannons(renderer.mapCoordsToPixel(event.mouseCursor.coords));
         } 
           break; 
         default:
           break;
       }
     }
-
+   /// std::cout << event.
     renderer.clear();
     engine.drawMap(renderer, states);
     engine.update();

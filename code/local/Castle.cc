@@ -3,7 +3,7 @@
 
 #include <gf/Sprite.h>
 #include <gf/RenderTarget.h>
-
+#include <iostream>
 namespace rampart {
     Castle::Castle() {
 

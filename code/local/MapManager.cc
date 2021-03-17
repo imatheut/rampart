@@ -58,11 +58,6 @@ namespace rampart {
     }
 
 
-    // gf::Vector2f MapManager::getCastlePosition() const {
-        
-    // }
-
-
     Map& MapManager::getMap() {
         return m_map;
     }
