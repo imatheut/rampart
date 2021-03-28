@@ -17,7 +17,7 @@ namespace rampart {
         m_frameCount = 0;
     }   
 
-    void Engine::drawMap(gf::RenderWindow& window, const gf::RenderStates& states) {
+    void Engine::draw(gf::RenderWindow& window, const gf::RenderStates& states) {
         m_mapManager.render(window, states, m_frameCount);
         if(isCastleSelected) {
             m_castleManager.render(window, states, m_frameCount);

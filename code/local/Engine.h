@@ -17,7 +17,7 @@ namespace rampart {
     public:
 
         virtual void initGame();
-        void drawMap(gf::RenderWindow& window, const gf::RenderStates& states);
+        void draw(gf::RenderWindow& window, const gf::RenderStates& states);
         void update(); 
 
         void rotateCannons(gf::Vector2f cursorPos); 

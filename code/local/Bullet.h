@@ -11,7 +11,7 @@ namespace rampart {
     public:
         Bullet(char team, const gf::Vector2f& positionOriginal, const gf::Vector2f& positionTarget); // team c = cannon, s = ship
         bool move(); // return true if the bullet reach the target
-     
+        
 
         virtual void render(gf::RenderTarget& target, const gf::RenderStates& states) override;
 
