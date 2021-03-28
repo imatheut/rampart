@@ -75,7 +75,7 @@ int main() {
     }
 
     renderer.clear();
-    engine.drawMap(renderer, states);
+    engine.draw(renderer, states);
     engine.update();
     renderer.display();
   }
