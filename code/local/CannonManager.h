@@ -12,6 +12,11 @@ namespace rampart {
 
         void rotateCannons(gf::Vector2f mouseCoord);
 
+        void shoot(gf::Vector2f mouseCoord);
+
+
+        size_t getSize();
+
         void render(gf::RenderTarget& target, const gf::RenderStates& states);
 
     private:

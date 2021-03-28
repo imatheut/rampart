@@ -5,14 +5,13 @@
 #include <gf/Text.h>
 #include <gf/Window.h>
 #include <gf/EntityContainer.h>
-
+#include <gf/Action.h>
 
 #include "local/Singletons.h"
 #include "local/Engine.h"
 #include "config.h"
 
 
-#include <iostream>
 
 int main() {
   // Create the main window and the renderer
@@ -22,6 +21,17 @@ int main() {
 
   gf::SingletonStorage<gf::ResourceManager> storageForResourceManager(rampart::gResourceManager);
 
+  // actions
+  gf::ActionContainer actions;
+  gf::Action closeWindowAction("Close window");
+  closeWindowAction.addCloseControl();
+  closeWindowAction.addKeycodeKeyControl(gf::Keycode::Escape);
+  actions.addAction(closeWindowAction);
+
+
+
+
+
   // adding ressources to rampart data directory
   rampart::gResourceManager().addSearchDir(RAMPART_DATA_DIR);
 
@@ -29,41 +39,25 @@ int main() {
 
   rampart::Engine engine;
 
-
-  engine.initGame({12,12});
+  
+  
+  engine.initGame();
+  engine.gameIntro(renderer);
 
   // Create a graphical text to display
   gf::RenderStates states;
   renderer.clear(gf::Color::White);
   // Start the game loop
   while (window.isOpen()) {
-    gf::EventType test = gf::EventType::MouseMoved;
-   
-  
     // Process events
     gf::Event event;
-   // engine.testSelectCastle(event);
     while (window.pollEvent(event)) {
+      actions.processEvent(event);
+
       switch (event.type) {
-        case gf::EventType::Closed: // window close
-          window.close();
-          break;
-        case gf::EventType::KeyPressed: {
-                  auto keycode = event.key.keycode;
-                  switch (keycode) {
-                    case gf::Keycode::Escape:
-                        window.close();
-                      break; 
-                    default:
-                      break;
-                  }
-          
-                }
-
-          break;
-
         case gf::EventType::MouseButtonPressed: {
           engine.selectCastle(event.mouseButton.coords);
+          engine.shoot(event.mouseButton.coords);
         }
           break;
         case gf::EventType::MouseMoved : {
@@ -73,8 +67,13 @@ int main() {
         default:
           break;
       }
+
+      if (closeWindowAction.isActive()) {
+        window.close();
+      }
+  
     }
-   /// std::cout << event.
+
     renderer.clear();
     engine.drawMap(renderer, states);
     engine.update();

@@ -2,7 +2,6 @@
 #include "Dimension.h"
 
 
-
 namespace rampart {
 
     Cannon::Cannon(gf::Vector2f coord) {
@@ -12,15 +11,21 @@ namespace rampart {
     }
 
     void Cannon::rotate(gf::Vector2f mouseCoord) {
-        m_cannon.setRotation(-atan2(mouseCoord.x - m_position.x, mouseCoord.y - m_position.y) + 180 / 3.14159);
-
+        m_cannon.setRotation(-atan2(mouseCoord.x - m_cannon.getPosition().x, mouseCoord.y - m_cannon.getPosition().y) + (180-2) / 3.14159);
     }
 
 
+    void Cannon::shoot(gf::Vector2f mouseCoord) {
+        m_bulletManager.addBullet('c',m_position, mouseCoord);
+
+    }    
+
+
     void Cannon::render(gf::RenderTarget& target, const gf::RenderStates& states) {
-        
-        m_cannon.setPosition(m_position);
+        m_cannon.setAnchor(gf::Anchor::Center);
+        m_cannon.setPosition(m_position + C_TILE_DIMENSION/2);
         target.draw(m_cannon);
+        m_bulletManager.render(target, states);
     }
 
 }

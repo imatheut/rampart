@@ -9,19 +9,22 @@
 #include "TerritoryManager.h"
 #include "WallManager.h"
 #include "CannonManager.h"
+#include "BulletManager.h"
 
 namespace rampart {
     class Engine {
 
     public:
 
-        virtual void initGame(gf::Vector2i mapSize);
+        virtual void initGame();
         void drawMap(gf::RenderWindow& window, const gf::RenderStates& states);
         void update(); 
 
         void rotateCannons(gf::Vector2f cursorPos); 
 
         void selectCastle(gf::Vector2f cursorPos);
+
+        void shoot(gf::Vector2f cursorPos);
 
         void newGame(gf::RenderWindow& window, const gf::RenderStates& states);
 
@@ -36,7 +39,7 @@ namespace rampart {
         CastleManager m_castleManager;
         TerritoryManager m_territoryManager;
         CannonManager m_cannonManager;
-
+        BulletManager m_bulletManager;
         WallManager m_wallManager;
 
         size_t m_frameCount;
@@ -44,7 +47,8 @@ namespace rampart {
    
 
         bool isCastleSelected = false;
-
+        bool m_canShoot = false;
+        TextureLoader m_texture_loader;
     };
 }
 

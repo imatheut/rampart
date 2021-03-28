@@ -27,6 +27,8 @@ add_executable(rampart
   code/local/TerritoryManager.cc
   code/local/Cannon.cc
   code/local/CannonManager.cc
+  code/local/Bullet.cc
+  code/local/BulletManager.cc
 )
 
 target_include_directories(rampart

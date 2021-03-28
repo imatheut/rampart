@@ -4,12 +4,14 @@
 #include <gf/Text.h>
 #include <gf/Texture.h>
 #include <gf/Sprite.h>
-
+#include <gf/Font.h>
+#include <gf/Sleep.h>
+#include <gf/Time.h>
 #include <iostream>
 namespace rampart {
 
 
-    void Engine::initGame(gf::Vector2i mapSize) {
+    void Engine::initGame() {
         m_mapManager.generateMap();
         m_castleManager.init();
         m_frameCount = 0;
@@ -25,8 +27,18 @@ namespace rampart {
         }
     }
 
+    void Engine::shoot(gf::Vector2f cursorPos) {
+        gf::Vector2i coord = {(uint16_t)cursorPos.x/C_TILE_DIMENSION, (uint16_t)cursorPos.y/C_TILE_DIMENSION};
+        if(m_canShoot) {
+            m_cannonManager.shoot(coord);
+        }
+        if(m_cannonManager.getSize() == 3) {
+            m_canShoot = true;
+        }
+    }
 
 
+   
 
     void Engine::selectCastle(gf::Vector2f cursorPos) {
         // Translating cursor position into coordinate x and y    
@@ -52,11 +64,43 @@ namespace rampart {
 
     void Engine::newGame(gf::RenderWindow& window, const gf::RenderStates& states) {}
 
+
+
     void Engine::gameIntro(gf::RenderWindow& window) {
-        gf::Text titleGame;
-    
-        titleGame.setString("RAMPART");
+
+        // title
+        gf::Font& titleFont = gResourceManager().getFont("bones.ttf");
+        gf::Text titleGame("%RAMPART%", titleFont, 100);
+        titleGame.setColor(gf::Color::Black);
+        titleGame.setPosition({ 100, 100 });
+
+
+        // powered by
+        gf::Font& poweredFont = gResourceManager().getFont("blkchcry.ttf");
+        gf::Text powered("Powered by", poweredFont, 50);
+        powered.setPosition({100, 480});
+
+        // logos gf
+        gf::Sprite logo_gf(*m_texture_loader.load("gf_logo.png"));
+        logo_gf.setScale({0.5f, 0.5f});
+        logo_gf.setPosition({500,500});
+        // logos cpp
+        gf::Sprite logo_cpp(*m_texture_loader.load("cpp_logo.png"));
+        logo_cpp.setScale({0.1f, 0.1f});
+        logo_cpp.setPosition({400,500});
+
+
      
+        window.clear(gf::Color::White);
+        window.draw(titleGame);
+        window.draw(powered);
+        window.draw(logo_cpp);
+        window.draw(logo_gf);
+        window.display();
+
+
+        gf::sleep(gf::milliseconds(3000));
+
         
     }
 
@@ -64,11 +108,9 @@ namespace rampart {
 
     void Engine::gameTrasition(gf::RenderWindow& window, const gf::RenderStates& states, const uint8_t& gameState) {
         switch(gameState) {
-        case 1:
-            // Game intro
+        case 1: 
             break;
         case 2:
-            // Select castle
             break;
         case 3:
             break;        
